@@ -1,0 +1,47 @@
+import numpy as np
+def ordenar(lista, inferior , superior):
+  if (inferior > superior or inferior == superior):
+    return 0
+  pivote = lista[superior]
+  i = inferior 
+  j = superior - 1
+  aux = 0
+  c = 0
+  while ( j > i):
+    #print (i, j, pivote) 
+    if ( lista[j] < pivote and lista[i] >= pivote ):
+      aux = lista[j]
+      lista[j] = lista[i]
+      lista[i] = aux
+      i += 1
+      j -= 1
+      c+=1
+    if lista[i] < pivote:
+      i+=1
+      c+=1
+    if lista[j] >= pivote:
+      j-=1
+      c+=1
+  if (lista[i] > pivote ):
+    lista[superior] = lista[i]
+    lista[i] = pivote
+    c+=1
+  else:
+    i+=1
+    #print ("*")
+  #print(lista)
+  
+  c+= ordenar(lista, inferior , i-1)
+  c+= ordenar(lista, j+1 , superior)
+  return c
+c = 0
+l = [5 , 3 , 7 , 6 , 2 ,5, 1 ,4]
+#l = np.random.randint(1, 100, 20 ) 
+#l = [990, 862, 741 ,872, 387, 139,862 ,449 ,450, 778 ,562] 
+#l = [572, 225, 881, 292, 274, 496 ,725 ,977, 508, 178 ,399, 717,881 ,299, 841 ,191,881]
+l = np.random.randint(1, 1000, 500 )
+print (l)
+c = ordenar(l, 0 , len(l)-1 )
+
+print ( "\n\n\n",c, len(l))
+print (l)
